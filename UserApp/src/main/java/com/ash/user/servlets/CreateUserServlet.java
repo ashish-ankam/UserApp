@@ -47,7 +47,7 @@ public class CreateUserServlet extends HttpServlet {
 		    String lastName = request.getParameter("lastName");
 		    String email = request.getParameter("email");
 		    String password = request.getParameter("password");
-		    
+		    System.out.println("inside do post()");
 		    
 		    try {
 				Statement statement = connection.createStatement();

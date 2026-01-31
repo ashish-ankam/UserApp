@@ -9,14 +9,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
  * Servlet implementation class CreateUserServlet
  */
-@WebServlet("/updateServlet")
-public class UpdateUserServlet extends HttpServlet {
+@WebServlet("/readServlet")
+public class ReadUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection connection;
        
@@ -39,26 +40,56 @@ public class UpdateUserServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		    String firstName = request.getParameter("firstName");
-//		    String lastName = request.getParameter("lastName");
-		    
-		String email = request.getParameter("email");
-		 String password = request.getParameter("password");
-		 System.out.println("inside do post()");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		 System.out.println("inside do get()");
 		    
 		    
 		    try {
 				Statement statement = connection.createStatement();
-				int result = statement.executeUpdate("update user set password='"+password+"' where email='"+email+"'");
-				
+		
+				ResultSet resultset = statement.executeQuery("select * from user");
 				PrintWriter out = response.getWriter();
-				if(result>0) {
-				out.print("<H1> USER PASSWORD UPDATED </H1>");
+				out.println("<table>");
+				out.println("<tr>");
+				out.println("<th>");
+				out.println("First Name");
+				out.println("</th>");
+				out.println("<th>");
+				out.println("Last Name");
+				out.println("</th>");
+				out.println("<th>");
+				out.println("Email");
+				out.println("</th>");
+				out.println("</tr>");
+				out.println("</table>");
+				
+				while(resultset.next()) {
+					out.println("<html>");
+					out.println("<body>");
+					out.println("<tr>");
+					
+					out.println("<td>");
+					out.println(resultset.getString(1));
+					out.println("</td>");
+					out.println("</tr>");
+					
+					out.println("<td>");
+					out.println(resultset.getString(2));
+					out.println("</td>");
+					out.println("</tr>");
+					
+					out.println("<td>");
+					out.println(resultset.getString(3));
+					out.println("</td>");
+					out.println("</tr>");
+					out.println("</body>");
+					out.println("</html>");
+					
 				}
-				else {
-					out.print("<H1> ERROR CHANGING USER  PASSWORD</H1>");
-				}
+				
+				
 			} catch (SQLException e) {
 				
 				e.printStackTrace();
