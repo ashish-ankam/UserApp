@@ -51,44 +51,43 @@ public class ReadUserServlet extends HttpServlet {
 		
 				ResultSet resultset = statement.executeQuery("select * from user");
 				PrintWriter out = response.getWriter();
-				out.println("<table>");
-				out.println("<tr>");
-				out.println("<th>");
+				out.print("<table>");
+				
+				out.print("<tr>");
+				out.print("<th>");
 				out.println("First Name");
-				out.println("</th>");
-				out.println("<th>");
+				out.print("</th>");
+				out.print("<th>");
 				out.println("Last Name");
-				out.println("</th>");
-				out.println("<th>");
+				out.print("</th>");
+				out.print("<th>");
 				out.println("Email");
-				out.println("</th>");
-				out.println("</tr>");
-				out.println("</table>");
+				out.print("</th>");
+				out.print("</tr>");
+				
 				
 				while(resultset.next()) {
-					out.println("<html>");
-					out.println("<body>");
-					out.println("<tr>");
 					
-					out.println("<td>");
+					out.print("<tr>");
+					
+					out.print("<td>");
 					out.println(resultset.getString(1));
-					out.println("</td>");
-					out.println("</tr>");
+					out.print("</td>");
 					
-					out.println("<td>");
+					
+					out.print("<td>");
 					out.println(resultset.getString(2));
-					out.println("</td>");
-					out.println("</tr>");
+					out.print("</td>");
 					
-					out.println("<td>");
+					
+					out.print("<td>");
 					out.println(resultset.getString(3));
-					out.println("</td>");
-					out.println("</tr>");
-					out.println("</body>");
-					out.println("</html>");
+					out.print("</td>");
+					out.print("</tr>");
+					
 					
 				}
-				
+				out.print("</table>");
 				
 			} catch (SQLException e) {
 				
