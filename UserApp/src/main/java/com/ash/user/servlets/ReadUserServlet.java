@@ -1,10 +1,5 @@
 package com.ash.user.servlets;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -13,19 +8,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 /**
  * Servlet implementation class CreateUserServlet
  */
-@WebServlet("/readServlet")
+
 public class ReadUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection connection;
        
-   public void init() {
+   public void init(ServletConfig config) {
 	   try {
 		   System.out.println("init()");
-		   Class.forName("com.mysql.jdbc.Driver");
-		connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","Lulu@341");
+		   //Class.forName("com.mysql.jdbc.Driver");
+		   Class.forName("com.mysql.cj.jdbc.Driver");
+
+		connection = DriverManager.getConnection(config.getInitParameter("dbUrl"),config.getInitParameter("dbUser"),config.getInitParameter("dbPassword"));
 	   } catch (SQLException e) {
 		
 		e.printStackTrace();

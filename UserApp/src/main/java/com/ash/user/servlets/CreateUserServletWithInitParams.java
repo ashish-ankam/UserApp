@@ -17,7 +17,7 @@ import java.sql.Statement;
 /**
  * Servlet implementation class CreateUserServlet
  */
-@WebServlet(urlPatterns = "/addServlet",
+@WebServlet(urlPatterns = "/addServletWithInit",
         initParams = {@WebInitParam(name="dbUrl",value="jdbc:mysql://localhost:3306/mydb"),
 		@WebInitParam(name="dbUser",value="root"),
 		@WebInitParam(name="dbPassword",value="Lulu@341")})
@@ -28,8 +28,8 @@ public class CreateUserServletWithInitParams extends HttpServlet {
    public void init(ServletConfig config) {
 	   try {
 		   System.out.println("init()");
-		    Class.forName("com.mysql.jdbc.Driver");
-		   //Class.forName("com.mysql.cj.jdbc.Driver");
+		   // Class.forName("com.mysql.jdbc.Driver");
+		   Class.forName("com.mysql.cj.jdbc.Driver");
 
 		connection = DriverManager.getConnection(config.getInitParameter("dbUrl"),config.getInitParameter("dbUser"),config.getInitParameter("dbPassword"));
 	   } catch (SQLException e) {

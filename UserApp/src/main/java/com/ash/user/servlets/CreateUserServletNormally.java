@@ -17,7 +17,7 @@ import java.sql.Statement;
 /**
  * Servlet implementation class CreateUserServlet
  */
-@WebServlet("/addServlet")
+@WebServlet("/addServletWithOutInit")
 public class CreateUserServletNormally extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connection connection;
