@@ -27,8 +27,8 @@ public class ReadUserServlet extends HttpServlet {
    public void init(ServletConfig config) {
 	   try {
 		   System.out.println("init()");
-		   //Class.forName("com.mysql.jdbc.Driver");
-		   Class.forName("com.mysql.cj.jdbc.Driver");
+		   Class.forName("com.mysql.jdbc.Driver");
+		  // Class.forName("com.mysql.cj.jdbc.Driver");
 		   
 		   ServletContext servletContext = config.getServletContext();
 
